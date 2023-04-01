@@ -21,43 +21,46 @@ public class EmployeeServiceController {
     }
 
     @GetMapping(path = "add")
-    public String addEmployee(@RequestParam ("name") String name,
-                              @RequestParam ("surname") String surname) {
-        try {
-            Employee employee = new Employee(name, surname);
-            employeeService.addEmployee(employee);
-            return name + " " + surname + " добавлен(а)";
-        } catch (EmployeeAlreadyAddedException e) {
-            return "Такой сотрудник уже добавлен";
-        } catch (EmployeeStorageIsFullException e) {
-            return "База сотрудников переполнена";
-        }
+    public Employee addEmployee(@RequestParam ("name") String name,
+                                @RequestParam ("surname") String surname) {
+        return employeeService.addEmployee(name, surname);
+//        try {
+//            Employee employee = new Employee(name, surname);
+//            employeeService.addEmployee(employee);
+//            return name + " " + surname + " добавлен(а)";
+//        } catch (EmployeeAlreadyAddedException e) {
+//            return "Такой сотрудник уже добавлен";
+//        } catch (EmployeeStorageIsFullException e) {
+//            return "База сотрудников переполнена";
+//        }
 //        Employee employee = new Employee(name, surname);
 //        employeeService.addEmployee(employee);
 //        return name + " " + surname + " добавлен(а)";
     }
     @GetMapping(path = "del")
-    public String dellEmployee(@RequestParam ("name") String name,
-                              @RequestParam ("surname") String surname) {
-        try {
-            Employee employee = new Employee(name, surname);
-            employeeService.delEmployee(employee);
-            return name + " " + surname + " удален(а)";
-        } catch (EmployeeNotFoundException e) {
-            return "Сотрудник не найден";
-        }
+    public Employee dellEmployee(@RequestParam ("name") String name,
+                                 @RequestParam ("surname") String surname) {
+        return employeeService.delEmployee(name, surname);
+//        try {
+//            Employee employee = new Employee(name, surname);
+//            employeeService.delEmployee(employee);
+//            return name + " " + surname + " удален(а)";
+//        } catch (EmployeeNotFoundException e) {
+//            return "Сотрудник не найден";
+//        }
 //        Employee employee = new Employee(name, surname);
 //        employeeService.delEmployee(employee);
 //        return name + " " + surname + " удален(а)";
     }
 
     @GetMapping(path = "info")
-    public String infoEmployee(@RequestParam ("number") Integer number) {
-        try {
-            return employeeService.infoEmployee(number);
-        } catch (EmployeeNotFoundException e) {
-            return "Сотрудника с таким номером нет";
-        }
+    public Employee infoEmployee(@RequestParam ("name") String name, @RequestParam ("surname") String surname) {
+        return employeeService.infoEmployee(name, surname);
+//        try {
+//            return employeeService.infoEmployee(number);
+//        } catch (EmployeeNotFoundException e) {
+//            return "Сотрудника с таким номером нет";
+//        }
 //        final String employee;
 //        employee = employeeService.infoEmployee(number);
 //        return employee;

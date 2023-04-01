@@ -3,9 +3,9 @@ package pro.sky.homework26.DZ;
 public interface EmployeeService {
     String allEmployee();
 
-    void addEmployee(Employee employee);
+    Employee addEmployee(String name, String surname) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException;
 
-    void delEmployee(Employee employee);
+    Employee delEmployee(String name, String surname) throws EmployeeNotFoundException;
 
-    String infoEmployee(Integer number);
+    Employee infoEmployee(String name, String surname) throws EmployeeNotFoundException;
 }

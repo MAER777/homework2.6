@@ -7,47 +7,42 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    private static final int Standart = 20;
     List<Employee> employees = new ArrayList<>(List.of(
             new Employee("Trapka", "Abuze")
     ));
-
     public String allEmployee() {
         return "Сотрудников в штате: " + employees.size();
     }
 
     @Override
-    public void addEmployee(Employee employee) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employee.equals(employees.get(i)) == true) {
-                throw new EmployeeAlreadyAddedException();
-            }
-        }
-        if (employees.size() > employees.size()) {
+    public Employee addEmployee(String name, String surname) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
+        Employee employee1 = new Employee(name, surname);
+        if (employees.size() >= Standart) {
             throw new EmployeeStorageIsFullException();
         }
-        employees.add(employee);
-    }
-
-    @Override
-    public void delEmployee(Employee employee) throws EmployeeNotFoundException {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employee.equals(employees.get(i))) {
-                employees.remove(employee);
-            }
+        if (employees.contains(employee1)) {
+            throw new EmployeeAlreadyAddedException();
         }
-        throw new EmployeeNotFoundException();
+        employees.add(employee1);
+        return employee1;
     }
 
     @Override
-    public String infoEmployee(Integer number) throws EmployeeNotFoundException {
-        final Employee employee;
-        if (number >= employees.size()) {
+    public Employee delEmployee(String name, String surname) throws EmployeeNotFoundException {
+        int index = employees.indexOf(new Employee(name, surname));
+        if (index == -1) {
             throw new EmployeeNotFoundException();
         }
-        employee = employees.get(number);
+        return employees.remove(index);
+    }
 
-        final String employeeName = employee.getName() +
-                " " + employee.getSurname();
-        return employeeName;
+    @Override
+    public Employee infoEmployee(String name, String surname) throws EmployeeNotFoundException {
+        int index = employees.indexOf(new Employee(name, surname));
+        if (index == -1) {
+            throw new EmployeeNotFoundException();
+        }
+        return employees.get(index);
     }
 }
